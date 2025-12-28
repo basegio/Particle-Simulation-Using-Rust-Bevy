@@ -1,6 +1,6 @@
 # 🦀 Particle Simulator: Odisseia no Rust & Bevy
 
-    Status: WIP (Work In Progress) – Ou seja, se quebrar, é porque estou aprendendo. :)
+Status: WIP (Work In Progress) – Ou seja, se quebrar, é porque estou aprendendo. :)
 
 ## 📓 O Devlog
 ### Por que Rust?
@@ -16,10 +16,8 @@ Sim, eu sei... outro simulador de partículas. Mas tem um motivo! Eu já fiz iss
 
 Desta vez, quero ser purista:
 
-    - Foco na CPU: Quero ver o Rust fritar todos os núcleos do meu processador.
-
-    - Paralelismo Real: Nada de async de fachada. Quero uso intenso de multithread.
-
-    - Bevy & ECS: Escolhi o Bevy (estou usando a v0.17.3 — sim, o negócio é instável e muda todo dia) porque o foco deles em ECS (Entity Component System) é bizarramente rápido para lidar com milhares de entidades em paralelo.
+- Foco na CPU: Quero ver o Rust fritar todos os núcleos do meu processador.
+- Paralelismo Real: Nada de async de fachada. Quero uso intenso de multithread.
+- Bevy & ECS: Escolhi o Bevy (estou usando a v0.17.3 — sim, o negócio é instável e muda todo dia) porque o foco deles em ECS (Entity Component System) é bizarramente rápido para lidar com milhares de entidades em paralelo.
 
 Enquanto escrevia isso, já me cocei para fazer um projeto de IA independente de agentes interagindo com o ambiente, mas foco nisso aqui primeiro! Uma coisa de cada vez para não virar aquele cemitério de projetos inacabados no GitHub (minha situação atual).
