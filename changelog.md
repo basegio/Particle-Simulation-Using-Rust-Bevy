@@ -13,6 +13,7 @@ Isso se dá pela lógica de colisão, levando cada particula buscar com possivei
 
 ### 0.2.0 - 28/12/2025
 > Creio que o uso de Verlet simplificado para calculo deterministico vai servir bem.
+
 #### Adicionado
 - Parâmetros position e position_old a Particle
 - Função solve_collisions a Particle com O(n²) com base no raio (atualmente constante)
