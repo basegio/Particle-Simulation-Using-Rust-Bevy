@@ -4,8 +4,8 @@ use crate::particles::components::Particle;
 use crate::simulation::resources::SimulationSettings;
 
 pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>) {
-    for i in 1..48 {
-        for j in 1..48 {
+    for i in 1..32 {
+        for j in 1..32 {
             if i % 2 != 0 || j % 2 != 0 {
                 continue;
             }

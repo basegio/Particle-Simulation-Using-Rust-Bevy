@@ -1,6 +1,6 @@
 # Changelog
 
-### dev
+### 0.3.0 - 28/12/2025
 > Aumentar o tamanho da simulação e elevar o numero de particulas para ~1000 levou o fps para ~1.
 Isso se dá pela lógica de colisão, levando cada particula buscar com possiveis colisões com todas as outras particulas, O(n²) como dito anteriormente
 
