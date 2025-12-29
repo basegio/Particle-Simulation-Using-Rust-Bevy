@@ -4,6 +4,8 @@
 #### Adicionado
 - Suporte a gravidade para ponto fixo
 - Suporte a desativar gravidade
+#### Alterado
+- Lógica do spawn de particulas
 
 ### 0.2.0 - 28/12/2025
 > Creio que o uso de Verlet simplificado para calculo deterministico vai servir bem.
