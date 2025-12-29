@@ -1,7 +1,7 @@
 # Changelog
 
 ### 0.4.0 - a definir
-> Cá estou eu as três da manhã do dia 29/12/2025 estudando uma estrutura de grid que seja interessante pro meu problema, estou com certa confiança em implementar uniform grid, acredito que seja uma implementação menos eficiente que uma kd-tree, mas sem dúvidas é mais fácil de implementar um multithread em um grid com tamanho constante do que recalcular uma arvore de divisões a cada fixedUpdate. De qualquer forma tudo está sujeito a mudanças no futuro, vamos ver como se sai essas abordagens.
+> Cá estou eu as três da manhã do dia 29/12/2025 estudando uma estrutura de grid que seja interessante para resolver meu problema de colisões entre particulas inimiga do desempenho, estou com certa confiança em implementar uniform grid, acredito que seja uma implementação menos eficiente que uma kd-tree, mas sem dúvidas é mais fácil de implementar um multithread em um grid com tamanho constante do que recalcular uma arvore de divisões a cada fixedUpdate. De qualquer forma tudo está sujeito a mudanças no futuro, vamos ver como se sai essas abordagens.
 
 ### 0.3.0 - 28/12/2025
 > Aumentar o tamanho da simulação e elevar o numero de particulas para ~1000 levou o fps para ~1.
