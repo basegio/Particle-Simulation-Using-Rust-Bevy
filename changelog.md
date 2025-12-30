@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.4.1 - 30/12/2025
+> Apenas algumas melhorias de código // Desaparecimento de números mágicos // Organização e boas práticas.
+
+#### Adicionado
+- Adicionado max_particle_radius ao SimulationSettings
+- Adicionado radius ao construtor da Particle
+- Adicionado GridCollision e SimulationSettings como provedores de informações para spawn de particulas
+#### Alterado
+- Tamanho do GridCollision recebe o valor do Resource SimulationSettings
+- Tamanho da célula do grid recebe o diâmetro da maior partícula definida em SimulationSettings
+- Alterado nome do construtor da Particle, from_position -> new
+- Particles Draw busca radius definido na Partícula
+
+
 ### 0.4.0 - 29/12/2025
 > Cá estou eu as três da manhã do dia 29/12/2025 estudando uma estrutura de grid que seja interessante para resolver meu problema de colisões entre particulas inimiga do desempenho, estou com certa confiança em implementar uniform grid, acredito que seja uma implementação menos eficiente que uma kd-tree, mas sem dúvidas é mais fácil de implementar um multithread em um grid com tamanho constante do que recalcular uma arvore de divisões a cada fixedUpdate. De qualquer forma tudo está sujeito a mudanças no futuro, vamos ver como se sai essas abordagens.
 
