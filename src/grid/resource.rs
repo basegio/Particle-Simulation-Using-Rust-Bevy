@@ -15,9 +15,8 @@ impl FromWorld for CollisionGrid {
             .get_resource::<SimulationSettings>()
             .expect("SimulationSettigns must be inserted before CollisionGrid");
 
-        let particle_radius = 4.0;
-        let particle_diameter = particle_radius * 2.0;
-        let cell_size = particle_diameter;
+        let max_particle_diameter = settings.max_particle_radius * 2.0;
+        let cell_size = max_particle_diameter;
         let size = (settings.size / (cell_size)).ceil() as usize;
         Self {
             cell_size,
