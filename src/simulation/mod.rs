@@ -14,6 +14,15 @@ impl Plugin for SimulationPlugin {
     }
 }
 
-fn setup_camera(mut commands: Commands) {
-    commands.spawn(Camera2d::default());
+fn setup_camera(mut commands: Commands, settings: Res<SimulationSettings>) {
+    commands.spawn((
+        Camera2d,
+        Projection::from(OrthographicProjection {
+            scaling_mode: bevy::camera::ScalingMode::Fixed {
+                width: settings.size,
+                height: settings.size,
+            },
+            ..OrthographicProjection::default_2d()
+        }),
+    ));
 }
