@@ -25,7 +25,7 @@ pub fn update_grid(
     if let Some(diag) = diag.get_mut(&DiagnosticPlugin::GRID_UPDATE_TIME) {
         diag.add_measurement(DiagnosticMeasurement {
             time: Instant::now(),
-            value: elapsed.as_secs_f64() * 1000.0,
+            value: elapsed.as_secs_f64() * 1000000.0,
         });
     }
 }

@@ -54,7 +54,7 @@ pub fn solve_collisions(
     if let Some(diag) = diag.get_mut(&DiagnosticPlugin::SOLVE_COLLISIONS_TIME) {
         diag.add_measurement(DiagnosticMeasurement {
             time: Instant::now(),
-            value: elapsed.as_secs_f64() * 1000.0,
+            value: elapsed.as_secs_f64() * 1000000.0,
         });
     }
 }

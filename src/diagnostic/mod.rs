@@ -19,12 +19,12 @@ impl Plugin for DiagnosticPlugin {
             .add_plugins(LogDiagnosticsPlugin::default())
             .register_diagnostic(
                 Diagnostic::new(Self::SOLVE_COLLISIONS_TIME)
-                    .with_suffix("ms")
+                    .with_suffix("µs")
                     .with_max_history_length(Self::MAX_HISTORY_LENGTH),
             )
             .register_diagnostic(
                 Diagnostic::new(Self::GRID_UPDATE_TIME)
-                    .with_suffix("ms")
+                    .with_suffix("µs")
                     .with_max_history_length(Self::MAX_HISTORY_LENGTH),
             );
     }
