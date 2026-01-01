@@ -1,3 +1,6 @@
+use std::time::Instant;
+
+use crate::core::diagnostic::resource::CollisionDiagnostic;
 use crate::grid::resource::CollisionGrid;
 use crate::particles::components::Particle;
 use crate::simulation::resources::SimulationSettings;
@@ -5,7 +8,13 @@ use crate::simulation::resources::SimulationSettings;
 use bevy::math::USizeVec2;
 use bevy::prelude::*;
 
-pub fn solve_collisions(grid: Res<CollisionGrid>, mut query: Query<&mut Particle>) {
+pub fn solve_collisions(
+    grid: Res<CollisionGrid>,
+    mut query: Query<&mut Particle>,
+    mut diag: ResMut<CollisionDiagnostic>,
+) {
+    let start = Instant::now();
+
     for y in 0..grid.size as i32 {
         for x in 0..grid.size as i32 {
             let neighbors = [(0, 0), (1, 0), (0, 1), (1, 1), (-1, 1)];
@@ -38,6 +47,13 @@ pub fn solve_collisions(grid: Res<CollisionGrid>, mut query: Query<&mut Particle
                 }
             }
         }
+    }
+
+    let duration = start.elapsed();
+    diag.times.push(duration);
+
+    if diag.times.len() == diag.max_samples {
+        diag.print_result();
     }
 }
 
