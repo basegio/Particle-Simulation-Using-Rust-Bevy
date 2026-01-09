@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug executable 'deterministic_particle_simulation'",
+            "name": "Debug",
             "type": "lldb",
             "request": "launch",
             "cargo": {
@@ -17,7 +17,7 @@
             "args": []
         },
         {
-            "name": "Debug unit tests in executable 'deterministic_particle_simulation'",
+            "name": "Debug unit tests",
             "type": "lldb",
             "request": "launch",
             "cargo": {
@@ -26,6 +26,18 @@
                     "--bin=deterministic_particle_simulation"
                 ]
             }
+        },
+        {
+            "name": "Release",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=deterministic_particle_simulation",
+                    "--release"
+                ]
+            },
         }
     ]
 }
