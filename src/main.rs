@@ -21,6 +21,7 @@ fn main() {
             }),
             ..default()
         }))
+        .insert_resource(Time::<Fixed>::from_hz(64.0))
         .add_plugins(DiagnosticPlugin)
         .add_plugins(CorePlugin)
         .add_plugins(SimulationPlugin)
