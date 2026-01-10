@@ -24,7 +24,7 @@ pub fn apply_physics(
 
         let velocity = particle.position - particle.position_old;
         particle.position_old = particle.position;
-        particle.position = particle.position + velocity + acceleration * (dt * dt);
+        particle.position += velocity + acceleration * (dt * dt);
         transform.translation = particle.position.extend(0.0);
     }
 }
