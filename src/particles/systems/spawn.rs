@@ -1,17 +1,12 @@
 use bevy::prelude::*;
 
-use crate::grid::resource::CollisionGrid;
 use crate::particles::components::Particle;
 use crate::simulation::resources::SimulationSettings;
 
-pub fn spawn_particles(
-    mut commands: Commands,
-    settings: Res<SimulationSettings>,
-    grid_settings: Res<CollisionGrid>,
-) {
+pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>) {
     let simulation_size = settings.size as f32;
-    for i in 1..grid_settings.size {
-        for j in 1..grid_settings.size {
+    for i in 1..settings.size {
+        for j in 1..settings.size {
             if i % 2 != 0 || j % 2 != 0 {
                 continue;
             }
