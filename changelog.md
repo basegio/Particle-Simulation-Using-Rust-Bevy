@@ -7,6 +7,8 @@ No fim vai aumentar bastante a precisão mesmo usando f32.
 Particularmente, também planejo implementar um sistema de substeps, mas isso pode custar problemas de colisão com o grid.
 Enfim, estou avaliando.
 
+> Acontece que nesse PR subiram algumas mudanças menores de preparativo para a mudança maior, 'os substeps'. Sinceramente, eu já fiz alguns testes com ele a parte, mas decidi mante-los separados por organização mesmo, até lá.
+
 #### Adicionado
 - Declarado intervalo do Fixed Update explícitamente
 - Adicionado task.json para facilitar execução
@@ -56,7 +58,7 @@ Enfim, estou avaliando.
 
 > Como imaginado o ganho de desempenho foi muito alto, saindo de ~1 fps para ~>100fps (o medidor atualiza mais rápido que eu sou capaz de identificar os números, mas tem 3 números e o vsync é um limitante, 165fps no caso), com atualizações futuras teremos uma precisão maior na medida.
 
-> Os sistemas de busca dinâmica do bevy tem sido muito úteis, junto com as buscas eficientes de ECS com querys, tem umas formas interessantes de validar e obter multiplos valores mutáveis em simultâneo sem ferir as definições de segurança de memória intrínsecas do Rust
+> Os sistemas de busca dinâmica do bevy tem sido muito úteis, junto com as buscas eficientes de ECS com querys, tem umas formas interessantes de validar e obter multiplos valores mutáveis em simultâneo sem ferir as definições de segurança de memória intrínsecas do Rust.
 
 #### Adicionado
 - Uniform Grid para detecção eficiente de colisões
