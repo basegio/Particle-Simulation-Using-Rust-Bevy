@@ -1,5 +1,25 @@
 # Changelog | Devlog
 
+### 0.5.0 - 10/01/2025
+> A maior das minhas questões com os substeps, "Faz sentido implementar substeps ou seria melhor apenas subir os hz do fixed update?", após muita pesquisa, entendi que no caso dessa simulação, a variar do futuro que pretendo chegar com ela, a solução de apenas aumentar os hz teria overhead no ECS tendo que fazer mais querys que o necessário, então uma solução seria sair dele, mas eu planejo seguir a abordagem gerenciada pelo bevy. A diferença não será tanta por agora, mas planejo subir uma otimização ainda na v0.5.x reduzindo o overhead criado por ambos os métodos, mas supostamente mais fácil para tratar com ECS e substeps. Será uma otimização legal que planejo medir e documentar, mas fica pra mim descobrir no futuro próximo.
+
+> Sobre os testes de performance, tive um problema pra fazer uma das otimizações que eu queria por um fator, instabilidade da simulação. A otimização depende de algumas configurações especificas na simulação com valores multiplos de *x* valor, portanto, senti a necessidade de adiar essa etapa e partir para algo mais estável antes. Então essas otimizações devem dar frutos na v0.6 ou v0.7.
+
+> Estava pensando aqui, o horario desses commits próximos podem levar a uma compreensão errada. Muitas das minhas mudanças são feitas em um momento e não ficam 100% da forma que eu gostaria de subir, então acabam se misturando com algumas outras implementações. Por fim eu tiro um tempo para reorganizar as mudanças, ideias e lógica de separação. Quando termino essa etapa fico com vários commits organizados para subir, daí vai junto, resumo, acabei tirando um pouco de cada dia nesse projeto, mas a lógica de subida dos commits acaba mascarando isso e condensando em um conjunto de commits com periodos próximos. O tempo que levo entendendo cada conceito antes de aplicá-lo também é consideravel, são muitos cálculos e fórmulas matemáticas que estou tendo contato pela primeira vez. (Imagino que seja esperado para alguém que não se formou em física hehe).
+
+#### Adicionado
+- Sistema de substeps
+- Adicionado log ao git ignore
+
+#### Alterado
+- Alterado configuração da simulação para se adaptar com substeps
+- Sistemas de física de movimento e colisão foram migrado para lógica interna
+- **dt*dt** substituído por **dt** por substep
+- Renomeado friction (global) para damping
+- Renomeado collision_friction para restitution_amortization
+- Alterado logfile
+
+---
 ### 0.4.4 - 08/01/2025
 > Enquanto faço meus diversos testes de performance, notei algo que estou fazendo "errado", minha precisão com posição e velocity(implícita) não estava me agradando, isso se deve ao fato de estar usando **dt*dt** para os cálculos de física, que não deve ser necessário usando fixed update.
 Portanto planejo fazer uma migração para **dt** apenas, isso vai fazer grande mudança nas velocidades, então terei que reduzir alguns valores.
@@ -45,6 +65,7 @@ Enfim, estou avaliando.
 - Adicionado max_particle_radius ao SimulationSettings
 - Adicionado radius ao construtor da Particle
 - Adicionado GridCollision e SimulationSettings como provedores de informações para spawn de particulas
+
 #### Alterado
 - Tamanho do GridCollision recebe o valor do Resource SimulationSettings
 - Tamanho da célula do grid recebe o diâmetro da maior partícula definida em SimulationSettings
@@ -64,8 +85,10 @@ Enfim, estou avaliando.
 #### Adicionado
 - Uniform Grid para detecção eficiente de colisões
 - Propriedade de raio para particulas
+
 #### Removido
 - Sistema de render zoom
+
 #### Alterado
 - Força de atração gravitacional minima foi reajustada para evitar problema de velocidade infinita por proximidade ao ponto de força
 - Reajustado sistema de spawn
@@ -81,6 +104,7 @@ Isso se dá pela lógica de colisão, levando cada particula buscar com possivei
 - Suporte a gravidade para ponto fixo
 - Suporte a desativar gravidade
 - Medidor de fps ao nome da janela
+
 #### Alterado
 - Lógica do spawn de particulas
 
@@ -93,8 +117,10 @@ Isso se dá pela lógica de colisão, levando cada particula buscar com possivei
 - Função solve_collisions a Particle com O(n²) com base no raio (atualmente constante)
 - Função solve_enviroment_constraints_limits a Particle
 - Gravidade
+
 #### Removido
 - Parâmetro velocity
+
 #### Alterado
 - Construtor impl default de Particle foi substituído por from_position
 - Lógica do spawn de particulas
