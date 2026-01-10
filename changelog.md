@@ -1,5 +1,24 @@
 # Changelog | Devlog
 
+### 0.4.4 - 08/01/2025
+> Enquanto faço meus diversos testes de performance, notei algo que estou fazendo "errado", minha precisão com posição e velocity(implícita) não estava me agradando, isso se deve ao fato de estar usando **dt*dt** para os cálculos de física, que não deve ser necessário usando fixed update.
+Portanto planejo fazer uma migração para **dt** apenas, isso vai fazer grande mudança nas velocidades, então terei que reduzir alguns valores.
+No fim vai aumentar bastante a precisão mesmo usando f32.
+Particularmente, também planejo implementar um sistema de substeps, mas isso pode custar problemas de colisão com o grid.
+Enfim, estou avaliando.
+
+#### Adicionado
+- Declarado intervalo do Fixed Update explícitamente
+- Adicionado task.json para facilitar execução
+- Adicionado collision_friction
+- Adicionado relaxation_factor
+
+#### Alterado
+- Padrão de spawn de particulas
+- Corrigido settings do spawn de partículas, agora leva simulation_settings em consideração invés de grid_settings
+- Configuração do launch.json
+
+---
 ### 0.4.3 - 01/01/2025
 > 2 da manhã do ano novo, estamos aqui. Planejo fazer algumas atualizações de otimizações em breve, então este update adiciona métricas para medição de velocidade de execução de algumas funções.
 
