@@ -9,7 +9,7 @@
 > Otimizar para que ECS faça query apenas uma vez por Fixed Update, reduzindo o stuttering por excesso de consultas (válidar possibilidade)
 
 ---
-### 0.5.1 - xx/01/2025
+### 0.5.1 - 10/01/2025
 #### Adicionado
 - Adicionado configuração de softening para suavizar o ponto de singularidade
 
