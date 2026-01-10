@@ -18,7 +18,7 @@ pub fn spawn_particles(mut commands: Commands, settings: Res<SimulationSettings>
             let position: Vec2 = Vec2 { x: x, y: y };
 
             if position.distance(Vec2::ZERO) < simulation_size * 0.04
-                || position.distance(Vec2::ZERO) > simulation_size * 0.5
+                || position.distance(Vec2::ZERO) > simulation_size * 0.48
             {
                 continue;
             };
