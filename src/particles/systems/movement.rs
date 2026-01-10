@@ -22,7 +22,7 @@ pub fn apply_physics(
             GravityMode::None => Vec2::ZERO,
         };
 
-        let velocity = particle.position - particle.position_old;
+        let velocity = (particle.position - particle.position_old) * settings.friction;
         particle.position_old = particle.position;
         particle.position += velocity + acceleration * (dt * dt);
         transform.translation = particle.position.extend(0.0);

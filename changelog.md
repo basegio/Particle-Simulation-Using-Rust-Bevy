@@ -12,6 +12,7 @@ Enfim, estou avaliando.
 #### Adicionado
 - Declarado intervalo do Fixed Update explícitamente
 - Adicionado task.json para facilitar execução
+- Adicionado friction (Global)
 - Adicionado collision_friction
 - Adicionado relaxation_factor
 
