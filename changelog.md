@@ -9,6 +9,11 @@
 > Otimizar para que ECS faça query apenas uma vez por Fixed Update, reduzindo o stuttering por excesso de consultas (válidar possibilidade)
 
 ---
+### 0.5.3 - 10/01/2025
+#### Alterado
+- Diagnóstico de solve_collisions agora roda fora da função, a nível de substeps
+
+---
 ### 0.5.2 - 10/01/2025
 #### Alterado
 - Diagnóstico gerado a cada 1000 -> 256 ms

@@ -1,22 +1,15 @@
-use std::time::Instant;
-
-use crate::diagnostic::DiagnosticPlugin;
 use crate::grid::resource::CollisionGrid;
 use crate::particles::components::Particle;
 use crate::simulation::resources::SimulationSettings;
 
-use bevy::diagnostic::{DiagnosticMeasurement, DiagnosticsStore};
 use bevy::math::USizeVec2;
 use bevy::prelude::*;
 
 pub fn solve_collisions_logic(
     grid: &CollisionGrid,
-    diag: &mut DiagnosticsStore,
     settings: &SimulationSettings,
     query: &mut Query<(&mut Transform, &mut Particle)>,
 ) {
-    let start = Instant::now();
-
     for y in 0..grid.size as i32 {
         for x in 0..grid.size as i32 {
             let neighbors = [(0, 0), (1, 0), (0, 1), (1, 1), (-1, 1)];
@@ -50,14 +43,6 @@ pub fn solve_collisions_logic(
                 }
             }
         }
-    }
-
-    let elapsed = start.elapsed();
-    if let Some(diag) = diag.get_mut(&DiagnosticPlugin::SOLVE_COLLISIONS_TIME) {
-        diag.add_measurement(DiagnosticMeasurement {
-            time: Instant::now(),
-            value: elapsed.as_secs_f64() * 1000000.0,
-        });
     }
 }
 

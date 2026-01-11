@@ -1,10 +1,13 @@
+use std::time::Instant;
+
+use crate::diagnostic::DiagnosticPlugin;
 use crate::grid::resource::CollisionGrid;
 use crate::particles;
 use crate::particles::components::Particle;
 
 use super::resources::SimulationSettings;
 
-use bevy::diagnostic::DiagnosticsStore;
+use bevy::diagnostic::{DiagnosticMeasurement, DiagnosticsStore};
 use bevy::prelude::*;
 
 pub fn step_physics_simulation(
@@ -20,14 +23,26 @@ pub fn step_physics_simulation(
 
     for _ in 0..substeps {
         particles::systems::movement::apply_physics_logic(&sub_dt, &settings, &mut query);
-        particles::systems::physics::solve_collisions_logic(
-            &grid, &mut diag, &settings, &mut query,
-        );
+
+        let start = Instant::now();
+        particles::systems::physics::solve_collisions_logic(&grid, &settings, &mut query);
+        finish_solve_collision_diag(start, &mut diag);
+
         particles::systems::physics::solve_limits_logic(&settings, &mut query);
     }
 
     for (mut transform, particle) in &mut query {
         transform.translation = particle.position.extend(0.0);
+    }
+
+    fn finish_solve_collision_diag(start: Instant, diag: &mut DiagnosticsStore) {
+        let elapsed = start.elapsed();
+        if let Some(diag) = diag.get_mut(&DiagnosticPlugin::SOLVE_COLLISIONS_TIME) {
+            diag.add_measurement(DiagnosticMeasurement {
+                time: Instant::now(),
+                value: elapsed.as_secs_f64() * 1000000.0,
+            });
+        }
     }
 }
 
