@@ -8,7 +8,7 @@ use bevy::prelude::*;
 pub fn solve_collisions_logic(
     grid: &CollisionGrid,
     settings: &SimulationSettings,
-    query: &mut Query<(&mut Transform, &mut Particle)>,
+    particles: &mut Vec<Particle>,
 ) {
     for y in 0..grid.size as i32 {
         for x in 0..grid.size as i32 {
@@ -30,12 +30,12 @@ pub fn solve_collisions_logic(
                         x: nx as usize,
                         y: ny as usize,
                     }) {
-                        let entities_a = &grid.cells[current_idx];
-                        let entities_b = &grid.cells[neighbor_idx];
-                        resolve_entities_collisions(
-                            entities_a,
-                            entities_b,
-                            query,
+                        let indexes_a = &grid.cells[current_idx];
+                        let indexes_b = &grid.cells[neighbor_idx];
+                        resolve_indexes_collisions(
+                            indexes_a,
+                            indexes_b,
+                            particles,
                             current_idx == neighbor_idx,
                             settings,
                         );
@@ -46,46 +46,46 @@ pub fn solve_collisions_logic(
     }
 }
 
-pub fn resolve_entities_collisions(
-    entities_a: &[Entity],
-    entities_b: &[Entity],
-    query: &mut Query<(&mut Transform, &mut Particle)>,
+pub fn resolve_indexes_collisions(
+    indexes_a: &[usize],
+    indexes_b: &[usize],
+    particles: &mut Vec<Particle>,
     same_cell: bool,
     settings: &SimulationSettings,
 ) {
-    for (i, &ent_a) in entities_a.iter().enumerate() {
+    for (i, &idx_a) in indexes_a.iter().enumerate() {
         let start_index = if same_cell { i + 1 } else { 0 };
 
-        for &ent_b in &entities_b[start_index..] {
-            if let Ok([(_, mut p_a), (_, mut p_b)]) = query.get_many_mut([ent_a, ent_b]) {
-                let collision_axis = p_a.position - p_b.position;
-                let dist_sq = collision_axis.length_squared();
-                let min_dist = p_a.radius + p_b.radius;
+        for &idx_b in &indexes_b[start_index..] {
+            let p_a_pos = particles[idx_a].position;
+            let p_b_pos = particles[idx_b].position;
+            let p_a_rad = particles[idx_a].radius;
+            let p_b_rad = particles[idx_b].radius;
 
-                if dist_sq < min_dist * min_dist {
-                    let dist = dist_sq.sqrt();
-                    let n = collision_axis / dist;
-                    let delta = min_dist - dist;
-                    let compensation = n * delta * settings.relaxation_factor;
+            let collision_axis = p_a_pos - p_b_pos;
+            let dist_sq = collision_axis.length_squared();
+            let min_dist = p_a_rad + p_b_rad;
 
-                    p_a.position += compensation;
-                    p_b.position -= compensation;
+            if dist_sq < min_dist * min_dist {
+                let dist = dist_sq.sqrt();
+                let n = collision_axis / dist;
+                let delta = min_dist - dist;
+                let compensation = n * delta * settings.relaxation_factor;
 
-                    p_a.position_old += compensation * settings.restitution_amortization;
-                    p_b.position_old -= compensation * settings.restitution_amortization;
-                }
+                particles[idx_a].position += compensation;
+                particles[idx_b].position -= compensation;
+
+                particles[idx_a].position_old += compensation * settings.restitution_amortization;
+                particles[idx_b].position_old -= compensation * settings.restitution_amortization;
             }
         }
     }
 }
 
-pub fn solve_limits_logic(
-    settings: &SimulationSettings,
-    query: &mut Query<(&mut Transform, &mut Particle)>,
-) {
+pub fn solve_limits_logic(settings: &SimulationSettings, particles: &mut Vec<Particle>) {
     let border_distance = settings.size as f32 / 2.0;
 
-    for (_, mut particle) in query {
+    for particle in particles {
         if particle.position.y < -border_distance + particle.radius {
             particle.position.y = -border_distance + particle.radius
         } else if particle.position.y > border_distance - particle.radius {

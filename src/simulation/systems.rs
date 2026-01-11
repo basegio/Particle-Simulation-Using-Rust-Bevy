@@ -16,23 +16,28 @@ pub fn step_physics_simulation(
     mut query: Query<(&mut Transform, &mut Particle)>,
     grid: Res<CollisionGrid>,
     mut diag: ResMut<DiagnosticsStore>,
+    mut particles: Local<Vec<Particle>>,
 ) {
     let dt = time.delta_secs();
     let substeps = settings.substeps;
     let sub_dt = dt / substeps as f32;
 
+    particles.clear();
+    particles.extend(query.iter().map(|(_, p)| *p));
+
     for _ in 0..substeps {
-        particles::systems::movement::apply_physics_logic(&sub_dt, &settings, &mut query);
+        particles::systems::movement::apply_physics_logic(&sub_dt, &settings, &mut particles);
 
         let start = Instant::now();
-        particles::systems::physics::solve_collisions_logic(&grid, &settings, &mut query);
+        particles::systems::physics::solve_collisions_logic(&grid, &settings, &mut particles);
         finish_solve_collision_diag(start, &mut diag);
 
-        particles::systems::physics::solve_limits_logic(&settings, &mut query);
+        particles::systems::physics::solve_limits_logic(&settings, &mut particles);
     }
 
-    for (mut transform, particle) in &mut query {
-        transform.translation = particle.position.extend(0.0);
+    for (i, (mut transform, mut particle)) in query.iter_mut().enumerate() {
+        *particle = particles[i];
+        transform.translation = particles[i].position.extend(0.0);
     }
 
     fn finish_solve_collision_diag(start: Instant, diag: &mut DiagnosticsStore) {

@@ -5,12 +5,8 @@ use crate::{
     simulation::resources::{GravityMode, SimulationSettings},
 };
 
-pub fn apply_physics_logic(
-    dt: &f32,
-    settings: &SimulationSettings,
-    query: &mut Query<(&mut Transform, &mut Particle)>,
-) {
-    for (_, mut particle) in query {
+pub fn apply_physics_logic(dt: &f32, settings: &SimulationSettings, particles: &mut Vec<Particle>) {
+    for particle in particles {
         let acceleration = match settings.gravity {
             GravityMode::Constant(g) => g,
             GravityMode::Point(center, strenght) => {

@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-#[derive(Component)]
+#[derive(Component, Clone, Copy)]
 pub struct Particle {
     pub position: Vec2,
     pub position_old: Vec2,

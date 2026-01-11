@@ -9,15 +9,15 @@ use crate::particles::components::Particle;
 
 pub fn update_grid(
     mut grid: ResMut<CollisionGrid>,
-    query: Query<(Entity, &Particle)>,
+    query: Query<&Particle>,
     mut diag: ResMut<DiagnosticsStore>,
 ) {
     let start = Instant::now();
 
     grid.clear();
-    for (entity, particle) in &query {
+    for (i, particle) in query.iter().enumerate() {
         if let Some(idx) = grid.get_cell_index_from_particle_pos(particle.position) {
-            grid.cells[idx].push(entity);
+            grid.cells[idx].push(i);
         }
     }
 

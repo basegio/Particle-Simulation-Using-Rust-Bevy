@@ -6,7 +6,7 @@ use crate::simulation::resources::SimulationSettings;
 pub struct CollisionGrid {
     pub cell_size: f32,
     pub size: usize,
-    pub cells: Vec<Vec<Entity>>,
+    pub cells: Vec<Vec<usize>>,
 }
 
 impl FromWorld for CollisionGrid {
